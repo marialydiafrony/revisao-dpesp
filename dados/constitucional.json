@@ -1,0 +1,417 @@
+{
+  "materia": "Direito Constitucional",
+  "bloco": "Constitucional 01",
+  "descricao": "Base: as 24 primeiras questões do caderno (teoria da Constituição, poder constituinte, hermenêutica, constitucionalismo).",
+  "cards": [
+    {
+      "id": "c01-o01",
+      "tema": "Origens do Estado",
+      "frente": "Ideologia gaulesa ou galicana (galicanismo): o que defendia?",
+      "verso": "O rei (e a Igreja nacional francesa) possuía certos direitos CONTRA o papa: autonomia do poder temporal/igreja da França frente a Roma.\n⚠ Não confundir com o direito divino dos reis (poder absoluto de origem divina; soberano só presta contas a Deus — Bossuet, Jaime I). Foi o seu erro: você marcou D.",
+      "origem": "Constitucional 01",
+      "errou": true
+    },
+    {
+      "id": "c01-o02",
+      "tema": "Origens do Estado",
+      "frente": "Qual teoria coloca a família como centro da formação do Estado?",
+      "verso": "Teoria patriarcal/familiar (ex.: Filmer; raízes em Aristóteles): o Estado seria a ampliação da família.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o03",
+      "tema": "Separação de poderes",
+      "frente": "Como Aristóteles chamou a necessidade de poderes com estruturas e funções distintas?",
+      "verso": "Constituição mista (politeia), combinando elementos monárquico, aristocrático e democrático. Políbio desenvolveu o modelo de constituição mista na análise de Roma.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o04",
+      "tema": "Separação de poderes",
+      "frente": "Montesquieu (O Espírito das Leis, cap. sobre a Constituição da Inglaterra): núcleo da tese?",
+      "verso": "Quando legislativo e executivo se reúnem na mesma pessoa ou corpo, não há liberdade; também não há se o poder de julgar não estiver separado. “O poder freia o poder”.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o05",
+      "tema": "Separação de poderes",
+      "frente": "Princípio da indelegabilidade de atribuições",
+      "verso": "Um Poder não pode transferir a outro as funções que a Constituição lhe atribuiu, salvo exceções expressas (ex.: lei delegada, art. 68 CF).",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o06",
+      "tema": "Mutação constitucional",
+      "frente": "Mutação constitucional: conceito",
+      "verso": "Alteração INFORMAL do sentido/alcance da norma, SEM mudança do texto (nova interpretação, costume). Processo difuso, fruto de mudanças sociais. Limite: não pode contrariar o texto nem os princípios estruturantes.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o07",
+      "tema": "Mutação constitucional",
+      "frente": "Reforma × Mutação × Revisão",
+      "verso": "Reforma: alteração formal do texto (emendas, art. 60).\nRevisão: modalidade formal prevista no art. 3º ADCT (5 anos, sessão unicameral, maioria absoluta) — eficácia exaurida, 6 emendas de revisão em 1994.\nMutação: informal, sem alterar o texto.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o08",
+      "tema": "Concepções de Constituição",
+      "frente": "Lassalle × Schmitt × Kelsen × Hesse",
+      "verso": "Lassalle (sociológica): soma dos fatores reais de poder; a escrita seria “folha de papel”.\nSchmitt (política): decisão política fundamental do titular do poder constituinte.\nKelsen (jurídica): norma fundamental/pura, plano lógico-jurídico e jurídico-positivo.\nHesse: força normativa da Constituição.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o09",
+      "tema": "Concepções de Constituição",
+      "frente": "Classificação ontológica de Loewenstein",
+      "verso": "Normativa (domina o processo político), nominal (juridicamente válida, sem eficácia real plena), semântica (formaliza o poder de quem o detém).",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o10",
+      "tema": "Constitucionalismo",
+      "frente": "“Constitucionalização simbólica” (Marcelo Neves)",
+      "verso": "Hipertrofia da função simbólico-política do texto em detrimento da sua força normativo-jurídica. Formas: confirmar valores sociais; constituição-álibi (dar aparência de solução); fórmula de compromisso dilatório (adiar conflitos).",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o11",
+      "tema": "Constitucionalismo",
+      "frente": "Neoconstitucionalismo: marcos e características",
+      "verso": "Marco histórico: pós-2ª Guerra (no Brasil, CF/88). Filosófico: pós-positivismo. Teórico: força normativa da Constituição, expansão da jurisdição constitucional, nova hermenêutica.\nCaracterísticas: normatividade dos princípios, ponderação, centralidade dos direitos fundamentais, constitucionalização do direito.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o12",
+      "tema": "Constitucionalismo",
+      "frente": "Novo constitucionalismo latino-americano",
+      "verso": "Venezuela 1999, Equador 2008, Bolívia 2009. Plurinacionalidade, pluralismo jurídico, direitos da natureza (Pachamama), bem viver (sumak kawsay), forte participação popular, teorias “a partir do Sul” (descolonização do saber).",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o13",
+      "tema": "Constitucionalismo",
+      "frente": "Constitucionalismo abusivo / retrocesso democrático",
+      "verso": "Uso de mecanismos formais de mudança constitucional (emendas, novas constituições, alterações pontuais) para minar a democracia: erosão gradual, sem ruptura aparente (David Landau; “legalismo autocrático”, Kim Scheppele).",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o14",
+      "tema": "Hermenêutica",
+      "frente": "Vedação ao retrocesso social (efeito cliquet)",
+      "verso": "Reconhecidos e concretizados os direitos sociais, o Estado não pode suprimi-los total ou parcialmente sem medidas compensatórias. Citado pelo STF (Celso de Mello) — excerto I da questão de hermenêutica.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o15",
+      "tema": "Hermenêutica",
+      "frente": "Concordância prática ou harmonização",
+      "verso": "Diante de bens constitucionais em tensão, coordená-los de modo a evitar o sacrifício total de um em relação ao outro (Hesse).",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o16",
+      "tema": "Hermenêutica",
+      "frente": "Unidade da Constituição e hierarquia entre normas originárias",
+      "verso": "A Constituição é um sistema; não há hierarquia entre normas constitucionais originárias, logo não cabe declarar umas inconstitucionais em face de outras (STF, ADI 815). Rejeição da tese de Otto Bachof (“normas constitucionais inconstitucionais”).",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o17",
+      "tema": "Hermenêutica",
+      "frente": "Catálogo de princípios interpretativos (Canotilho)",
+      "verso": "Unidade da Constituição; efeito integrador; máxima efetividade; justeza ou conformidade funcional; concordância prática/harmonização; força normativa da Constituição. (+ interpretação conforme).",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o18",
+      "tema": "Hermenêutica",
+      "frente": "Princípio do efeito integrador",
+      "verso": "Na resolução de problemas jurídico-constitucionais, dar primazia aos critérios que favoreçam a integração política e social e o reforço da unidade política.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o19",
+      "tema": "Hermenêutica",
+      "frente": "Máxima efetividade (eficiência)",
+      "verso": "Atribuir à norma constitucional o sentido que lhe dê maior eficácia; especialmente invocado para direitos fundamentais.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o20",
+      "tema": "Hermenêutica",
+      "frente": "Justeza ou conformidade funcional",
+      "verso": "O intérprete (sobretudo o tribunal constitucional) não pode subverter o esquema organizatório-funcional de repartição de funções estabelecido pela Constituição.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o21",
+      "tema": "Hermenêutica",
+      "frente": "Sociedade aberta dos intérpretes (Häberle): mecanismos no STF",
+      "verso": "Amicus curiae (Lei 9.868/99, art. 7º, §2º; CPC art. 138) e audiências públicas (Lei 9.868/99, art. 9º, §1º).",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o22",
+      "tema": "Hermenêutica",
+      "frente": "Controle judicial de políticas públicas: substancialismo × procedimentalismo",
+      "verso": "Substancialismo (Dworkin, Cappelletti): privilegia princípios; juiz como agente de transformação social, verifica conteúdo e concretiza direitos.\nProcedimentalismo (Habermas, Ely): Judiciário garante os procedimentos democráticos, com deferência ao legislador.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o23",
+      "tema": "Hermenêutica",
+      "frente": "Interpretação conforme + diálogo com tratados",
+      "verso": "Interpretação conforme: entre sentidos possíveis, escolher o compatível com a Constituição. Diálogo com normas internacionais → controle de convencionalidade. Tratados de DH: supralegais (RE 466.343) ou equivalentes a EC se aprovados pelo rito do art. 5º, §3º.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o24",
+      "tema": "Poder constituinte",
+      "frente": "Poder constituinte originário: características",
+      "verso": "Inicial (rompe com a ordem anterior e instaura uma nova), autônomo/ilimitado juridicamente, incondicionado, permanente. Pode ser histórico (1ª constituição) ou revolucionário.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o25",
+      "tema": "Poder constituinte",
+      "frente": "Poder derivado decorrente",
+      "verso": "Poder dos Estados de elaborarem suas próprias constituições (art. 25 CF; art. 11 ADCT). Limitado: observar princípios sensíveis, estabelecidos e extensíveis.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o26",
+      "tema": "Poder constituinte",
+      "frente": "Poder derivado reformador: características",
+      "verso": "Secundário/derivado, limitado e condicionado: só altera a Constituição por emendas, respeitando os limites do art. 60.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o27",
+      "tema": "Poder constituinte",
+      "frente": "Limitações ao poder de reforma (art. 60)",
+      "verso": "Formais: iniciativa (1/3 da Câmara ou do Senado; PR; mais da metade das Assembleias, cada uma por maioria relativa), 3/5 em dois turnos em cada Casa, promulgação pelas Mesas, irrepetibilidade na mesma sessão legislativa.\nCircunstanciais: intervenção federal, estado de defesa, estado de sítio.\nMateriais: cláusulas pétreas (§4º).\nTemporais: CF/88 não tem (a de 1824 tinha).\nImplícitas: titularidade e vedação à dupla revisão.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o28",
+      "tema": "Poder constituinte",
+      "frente": "Cláusulas pétreas (art. 60, §4º)",
+      "verso": "Não será objeto de deliberação proposta TENDENTE A ABOLIR: forma federativa; voto direto, secreto, universal e periódico; separação dos Poderes; direitos e garantias individuais.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o29",
+      "tema": "Normas no tempo",
+      "frente": "Desconstitucionalização",
+      "verso": "A Constituição anterior permanece em vigor, mas perde a supremacia: suas normas compatíveis são recebidas como legislação infraconstitucional. No Brasil só ocorre se houver previsão expressa.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o30",
+      "tema": "Normas no tempo",
+      "frente": "Recepção × Repristinação",
+      "verso": "Recepção: normas infraconstitucionais anteriores compatíveis materialmente são recebidas pela nova Constituição (incompatibilidade = não recepção/revogação, não inconstitucionalidade).\nRepristinação: retorno de norma revogada; no Brasil só se for expressa.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o31",
+      "tema": "Princípios",
+      "frente": "Princípios constitucionais sensíveis (art. 34, VII)",
+      "verso": "a) forma republicana, sistema representativo e regime democrático; b) direitos da pessoa humana; c) autonomia municipal; d) prestação de contas da administração direta e indireta; e) aplicação do mínimo exigido da receita em ensino e saúde.\nViolação → intervenção federal por representação do PGR provida pelo STF (ADI interventiva).",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o32",
+      "tema": "Princípios",
+      "frente": "Princípios estabelecidos e extensíveis",
+      "verso": "Estabelecidos: limitam a autonomia estadual de forma expressa ou implícita (ex.: regras de competência, vedações).\nExtensíveis: normas de organização da União aplicáveis aos Estados (ex.: processo legislativo, TCs, CPIs — simetria).",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o33",
+      "tema": "História constitucional",
+      "frente": "Constituição de 1824",
+      "verso": "Outorgada; 4 poderes: Moderador, Legislativo, Executivo e Judicial (não existia “Poder Federativo”); Estado unitário; religião oficial católica; semirrígida (art. 178).",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o34",
+      "tema": "História constitucional",
+      "frente": "1891 · 1934 · 1937 · 1946",
+      "verso": "1891: República federativa, presidencialismo, controle difuso, Estado laico.\n1934: constitucionalismo social, mandado de segurança, ação popular, voto feminino na Constituição.\n1937 (“Polaca”): outorgada, Estado Novo.\n1946: redemocratização.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o35",
+      "tema": "Teoria do Estado",
+      "frente": "Elementos do Estado",
+      "verso": "Povo, território e soberania (governo soberano); parte da doutrina acrescenta a finalidade.",
+      "origem": "Constitucional 01",
+      "errou": false
+    },
+    {
+      "id": "c01-o36",
+      "tema": "Classificação",
+      "frente": "Classificação da CF/88",
+      "verso": "Escrita, promulgada (democrática), dogmática, rígida (super-rígida para alguns, por causa das cláusulas pétreas), analítica, formal, eclética e dirigente.",
+      "origem": "Constitucional 01",
+      "errou": false
+    }
+  ],
+  "discursivas": [
+    {
+      "id": "c01-d1",
+      "q": "Discorra sobre o princípio da vedação ao retrocesso social: conceito, fundamentos constitucionais, limites e sua relação com a reserva do possível e o mínimo existencial. Aponte como a Defensoria Pública pode invocá-lo.",
+      "espelho": [
+        "Conceito: efeito cliquet; proibição de suprimir direitos sociais já concretizados sem compensação",
+        "Fundamentos: Estado Democrático e Social de Direito, dignidade (art. 1º, III), máxima efetividade (art. 5º, §1º), segurança jurídica",
+        "Limites: não é absoluto; o legislador pode reconfigurar desde que preserve o núcleo essencial / proporcionalidade",
+        "Reserva do possível: ônus de prova do Estado; não se opõe ao mínimo existencial",
+        "Jurisprudência do STF (ex.: ARE 639.337, voto de Celso de Mello)",
+        "Atuação da DPE: ACP, defesa coletiva de vulneráveis (art. 134 CF; LC 80/94, art. 4º)",
+        "Conclusão articulada"
+      ]
+    },
+    {
+      "id": "c01-d2",
+      "q": "Explique o fenômeno da mutação constitucional, diferenciando-o da reforma e da revisão. Indique limites e ao menos dois exemplos da jurisprudência do STF.",
+      "espelho": [
+        "Conceito: alteração informal de sentido sem mudança de texto",
+        "Distinção: reforma (emendas, art. 60) e revisão (art. 3º ADCT, eficácia exaurida)",
+        "Mecanismos: interpretação, costume, prática",
+        "Limites: texto como limite; princípios estruturantes; risco de mutação inconstitucional",
+        "Exemplos: união homoafetiva (ADI 4277/ADPF 132); art. 52, X (ADIs 3406 e 3470); foro por prerrogativa (AP 937)",
+        "Conclusão"
+      ]
+    },
+    {
+      "id": "c01-d3",
+      "q": "O que se entende por constitucionalismo abusivo? Analise o papel das cláusulas pétreas e do controle de constitucionalidade de emendas como mecanismos de proteção democrática.",
+      "espelho": [
+        "Conceito (Landau) e legalismo autocrático (Scheppele)",
+        "Mudanças pontuais e graduais, aparência de legalidade",
+        "Cláusulas pétreas (art. 60, §4º): “tendente a abolir”, proteção do núcleo",
+        "Controle de constitucionalidade de EC pelo STF (inclusive preventivo via MS de parlamentar)",
+        "Limites implícitos: vedação da dupla revisão",
+        "Papel institucional da Defensoria como expressão do regime democrático (art. 134)"
+      ]
+    },
+    {
+      "id": "c01-d4",
+      "q": "Disserte sobre o controle judicial de políticas públicas, contrapondo as correntes substancialista e procedimentalista e apontando a posição atual do STF.",
+      "espelho": [
+        "Substancialismo (Dworkin, Cappelletti) × procedimentalismo (Habermas, Ely)",
+        "Separação de poderes e legitimidade democrática",
+        "Mínimo existencial × reserva do possível",
+        "STF, Tema 698 (RE 684.612): o Judiciário aponta finalidades e a Administração apresenta um plano",
+        "Processos estruturais e ECI (ADPF 347)",
+        "Posicionamento crítico e conclusão"
+      ]
+    },
+    {
+      "id": "c01-d5",
+      "q": "Apresente o novo constitucionalismo latino-americano e relacione suas ideias à proteção dos povos indígenas e comunidades tradicionais no Brasil.",
+      "espelho": [
+        "Constituições da Venezuela (1999), do Equador (2008) e da Bolívia (2009)",
+        "Plurinacionalidade, pluralismo jurídico, bem viver, direitos da natureza",
+        "Epistemologias do Sul / descolonialidade",
+        "CF/88, arts. 231-232; Convenção 169 da OIT (consulta prévia)",
+        "STF: marco temporal (RE 1.017.365, Tema 1031)",
+        "Atuação da DPE em defesa de grupos vulneráveis"
+      ]
+    }
+  ],
+  "oral": [
+    {
+      "id": "c01-r1",
+      "q": "Candidata, o que é poder constituinte originário e quais são suas características?",
+      "followups": [
+        "Ele é realmente ilimitado? E o direito natural, as vedações de retrocesso e os tratados internacionais?",
+        "Quem é o titular? Distinga titularidade de exercício.",
+        "Como se relaciona com o poder decorrente dos Estados?"
+      ],
+      "pontos": "Inicial, autônomo, incondicionado, permanente; titular: o povo (Sieyès falava em nação); exercício pela assembleia. Debate jusnaturalista sobre limites; Canotilho fala em limites materiais suprapositivos. O decorrente é derivado e limitado (art. 25; princípios sensíveis, estabelecidos e extensíveis)."
+    },
+    {
+      "id": "c01-r2",
+      "q": "Fale sobre mutação constitucional.",
+      "followups": [
+        "Toda mutação é legítima? Existe mutação inconstitucional?",
+        "Dê um exemplo concreto do STF.",
+        "Qual o risco para a separação de poderes?"
+      ],
+      "pontos": "Mudança informal sem alterar o texto; o limite é o próprio texto e os princípios estruturantes. Exemplos: ADI 4277; art. 52, X. Risco de ativismo; a interpretação deve ser controlável e fundamentada."
+    },
+    {
+      "id": "c01-r3",
+      "q": "Distinga as concepções de Constituição de Lassalle, Schmitt e Kelsen.",
+      "followups": [
+        "E Konrad Hesse, como responde a Lassalle?",
+        "Qual delas fundamenta a ideia de supremacia formal?"
+      ],
+      "pontos": "Lassalle: fatores reais de poder. Schmitt: decisão política fundamental (distingue constituição de leis constitucionais). Kelsen: norma pura, escalonamento normativo e supremacia formal. Hesse: força normativa, a Constituição também conforma a realidade."
+    },
+    {
+      "id": "c01-r4",
+      "q": "Quais são os limites ao poder de reforma na CF/88?",
+      "followups": [
+        "Pode haver emenda que altere o próprio art. 60?",
+        "O que significa “tendente a abolir”?",
+        "Direitos sociais são cláusula pétrea?"
+      ],
+      "pontos": "Limites formais, circunstanciais e materiais; implícitos (titularidade, vedação à dupla revisão). “Tendente a abolir” protege o núcleo essencial, não a literalidade. Direitos sociais: a corrente majoritária na doutrina (Sarlet) os inclui como fundamentais; tema debatido."
+    },
+    {
+      "id": "c01-r5",
+      "q": "O que é a vedação ao retrocesso social e qual sua importância para a Defensoria?",
+      "followups": [
+        "É compatível com uma crise fiscal?",
+        "Como conciliar com a reserva do possível?"
+      ],
+      "pontos": "Efeito cliquet; não é absoluta; protege o núcleo essencial com proporcionalidade; o mínimo existencial é oponível à reserva do possível; ligação com a missão institucional da DPE (art. 134; LC 80/94)."
+    },
+    {
+      "id": "c01-r6",
+      "q": "Explique os princípios de interpretação constitucional sistematizados por Canotilho.",
+      "followups": [
+        "Diferencie concordância prática de ponderação.",
+        "Interpretação conforme: quais seus limites?"
+      ],
+      "pontos": "Unidade, efeito integrador, máxima efetividade, justeza, concordância prática e força normativa. Concordância prática busca a harmonização sem sacrifício total; a ponderação (Alexy) usa a proporcionalidade. Limites da interpretação conforme: texto e vontade do legislador (não pode virar legislador positivo)."
+    }
+  ]
+}
