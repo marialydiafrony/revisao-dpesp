@@ -2,7 +2,10 @@
 
 - `app/index.html` — o app (abas por matéria; objetiva com repetição espaçada, discursiva com espelho, oral com aprofundamento).
 - `dados/*.json` — conteúdo. **Ao criar um arquivo novo, adicione o nome em `dados/index.json`** (o GitHub Pages não lista pastas). Arquivos com o mesmo `"materia"` são agrupados na mesma aba.
-- `supabase.sql` — tabela `progresso` com RLS.
+- `supabase.sql` — tabelas `progresso` e `resumos`, com RLS.
+
+## Resumos
+Ficam na tabela `resumos` do Supabase (não em `dados/`), em Markdown, e são editados pela aba **📖 RESUMOS** do app (exige login). Campos: `materia` (igual ao nome da aba), `bloco` (ex.: "Constitucional 02"), `titulo`, `conteudo`, `ordem`. Quando o `bloco` do resumo é igual ao `origem` de um card, o card mostra o botão "Ver resumo do bloco".
 
 ## Supabase
 1. Rode `supabase.sql` no SQL Editor.

@@ -66,6 +66,18 @@ select{font:inherit;padding:8px;border-radius:6px;border:2px solid var(--line);b
 @keyframes bob{50%{transform:translateY(-6px)}}
 .confetti{position:fixed;top:-10px;width:8px;height:12px;z-index:60;pointer-events:none;animation:fall 1.8s linear forwards}
 @keyframes fall{to{transform:translateY(105vh) rotate(720deg)}}
+.md{line-height:1.65}.md h1{font-size:19px;color:var(--yel);margin:28px 0 10px;padding-top:14px;border-top:2px dashed var(--line)}.md h1:first-child{border:0;margin-top:0;padding:0}
+.md h2{font-size:16px;color:var(--cyan);margin:22px 0 8px}.md h3{font-size:15px;margin:18px 0 6px}.md p,.md li{color:var(--ink)}.md strong{color:var(--yel)}.md em{color:var(--mute)}
+.md table{display:block;overflow-x:auto;border-collapse:collapse;margin:12px 0;font-size:14px;max-width:100%}.md th,.md td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top;min-width:120px}
+.md th{background:var(--bg2);color:var(--cyan);font-size:12px}.md th strong{color:inherit}.md tr:nth-child(even) td{background:rgba(255,255,255,.03)}
+.md blockquote{margin:12px 0;padding:8px 14px;border-left:4px solid var(--pink);background:var(--bg)}.md code{background:var(--bg);padding:1px 5px;border-radius:4px}
+.md a{color:var(--cyan)}.md mark{background:var(--yel);color:#0d0a1a;padding:0 3px;border-radius:3px}
+.reslist button{display:block;width:100%;text-align:left;margin:8px 0;padding:14px}.reslist button small{display:block;color:var(--mute);font-weight:400;font-size:12px;margin-top:4px}
+.toc{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 4px}.toc button{font-size:12px;padding:5px 9px;font-weight:500}
+.field{display:block;margin:10px 0}.field span{display:block;font-size:12px;color:var(--mute);margin-bottom:4px}
+.field input{width:100%;font:inherit;padding:9px 10px;border-radius:8px;border:2px solid var(--line);background:var(--bg);color:var(--ink)}.field input:focus{outline:none;border-color:var(--cyan)}
+#resTxt{min-height:55vh;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;line-height:1.5}
+.seg{display:flex;gap:6px;margin:12px 0 8px}.seg button{padding:6px 12px;font-size:13px}
 @media (max-width:560px){.hud{grid-template-columns:repeat(2,1fr)}.front{font-size:18px}h1{font-size:12px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -89,6 +101,7 @@ select{font:inherit;padding:8px;border-radius:6px;border:2px solid var(--line);b
  <button data-v="obj" class="on">▶ OBJETIVA</button>
  <button data-v="disc">☠ CHEFÃO</button>
  <button data-v="oral">🎤 ORAL</button>
+ <button data-v="res">📖 RESUMOS</button>
  <button data-v="prog">★ PLACAR</button>
 </nav>
 </header>
@@ -125,6 +138,8 @@ select{font:inherit;padding:8px;border-radius:6px;border:2px solid var(--line);b
  </div>
 </section>
 
+<section id="res" class="hide"><div id="resArea"></div></section>
+
 <section id="prog" class="hide">
  <div class="stats" id="progStats"></div>
  <div class="card"><div class="tag px">EVOLUÇÃO · ÚLTIMOS 30 DIAS</div>
@@ -142,6 +157,8 @@ select{font:inherit;padding:8px;border-radius:6px;border:2px solid var(--line);b
 
 <script src="config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
 <script>
 const CFG=window.REV_CONFIG||{};const $=id=>document.getElementById(id);
 const DAY=864e5,today=()=>Math.floor((Date.now()-new Date().getTimezoneOffset()*6e4)/DAY),now=()=>Date.now();
@@ -164,7 +181,7 @@ async function push(){const{error}=await sb.from('progresso').upsert({user_id:us
  syncNote(error?'Erro ao salvar no Supabase: '+error.message:'Salvo no Supabase às '+new Date().toLocaleTimeString('pt-BR'))}
 async function pull(){const{data,error}=await sb.from('progresso').select('estado').eq('user_id',user.id).maybeSingle();
  if(error){syncNote('Erro ao ler do Supabase: '+error.message);return}
- S=merge(S,data?data.estado:{});saveLocal();await push();renderAll()}
+ S=merge(S,data?data.estado:{});saveLocal();await push();renderAll();loadRes()}
 function syncNote(t){$('syncMsg').textContent=t}
 function renderConta(){const c=$('conta');
  if(!sb){c.innerHTML='<span>Salvo neste navegador</span>';syncNote('Configure app/config.js para sincronizar entre aparelhos.');return}
@@ -176,7 +193,7 @@ function renderConta(){const c=$('conta');
   c.innerHTML='<span></span>';c.querySelector('span').textContent=error?'Erro: '+error.message:'Link enviado para '+email}}
 async function initSupabase(){if(!(CFG.SUPABASE_URL&&CFG.SUPABASE_ANON_KEY&&window.supabase)){renderConta();return}
  sb=window.supabase.createClient(CFG.SUPABASE_URL,CFG.SUPABASE_ANON_KEY);
- sb.auth.onAuthStateChange((ev,session)=>{const u=session?session.user:null;const ch=(u&&u.id)!==(user&&user.id);user=u;renderConta();if(u&&ch)pull()});
+ sb.auth.onAuthStateChange((ev,session)=>{const u=session?session.user:null;const ch=(u&&u.id)!==(user&&user.id);user=u;renderConta();if(u&&ch)pull();if(!u){RES=[];resCur=null;renderRes()}});
  const{data}=await sb.auth.getSession();user=data.session?data.session.user:null;renderConta();if(user)pull()}
 
 // ---------- Som & efeitos ----------
@@ -239,7 +256,7 @@ function renderObj(){clearInterval(tick);const ag=again.filter(id=>M.obj.some(c=
  <div class="tbar"><i id="tb"></i></div><div class="front"></div><div class="back hide" id="bk1"></div>
  <div id="rv"><textarea id="resp" style="min-height:90px;margin-top:16px" placeholder="Digite sua resposta… (Enter envia · Shift+Enter quebra linha)"></textarea>
  <div class="row"><button class="pri" id="show">Responder <span class="kbd">[Enter]</span></button></div></div>
- <div class="back hide" id="minha"></div>
+ <div class="back hide" id="minha"></div><div class="hide" id="resLk" style="margin-top:10px"></div>
  <div class="row hide" id="rt"><button class="b0" data-g="0">Errei<span class="kbd">1</span></button><button class="b1" data-g="1">Difícil<span class="kbd">2</span></button><button class="b2" data-g="2">Bom<span class="kbd">3</span></button><button class="b3" data-g="3">Fácil<span class="kbd">4</span></button></div></div>`;
  a.querySelector('.tag').textContent=c.tema||'CARD';a.querySelector('.front').textContent=c.frente;$('bk1').textContent=c.verso;
  shownAt=now();const tb=$('tb');
@@ -249,7 +266,8 @@ function reveal(){if(revealed||!cur)return;const txt=$('resp').value.trim();
  if(!txt){$('resp').placeholder='Escreva sua resposta antes de ver o gabarito.';fx($('resp'),'shake');$('resp').focus();return}
  revealed=true;$('resp').blur();const mi=$('minha');mi.textContent='Sua resposta: '+txt;mi.classList.remove('hide');mi.style.color='var(--mute)';clearInterval(tick);SFX.flip();
  const el=(now()-shownAt)/1e3;$('cardEl').dataset.speed=el<CARD_SECS?Math.round(50*(1-el/CARD_SECS)):0;
- $('bk1').classList.remove('hide');$('rv').classList.add('hide');$('rt').classList.remove('hide')}
+ $('bk1').classList.remove('hide');$('rv').classList.add('hide');$('rt').classList.remove('hide');
+ const cc=M.obj.find(x=>x.id===cur),r=cc&&resDoBloco(cc.origem);if(r){const lk=$('resLk');lk.innerHTML='<button style="padding:6px 10px;font-size:13px">📖 Ver resumo do bloco</button>';lk.classList.remove('hide');lk.firstChild.onclick=()=>abrirRes(r.id)}}
 function grade(g){if(!revealed)return;const t=today(),card=$('cardEl');let s=S.c[cur]||{iv:0,ef:2.5,first:t,reps:0,lapses:0};
  again=again.filter(i=>i!==cur);const cc=M.obj.find(x=>x.id===cur);logCard(cc&&cc.tema,g>0);
  if(g===0){s.iv=0;s.ef=Math.max(1.3,s.ef-0.2);s.lapses++;s.due=t;again.push(cur);combo=1;SFX.bad();fx(card,'shake');floatTxt('COMBO PERDIDO','#ff4d4d',card);touchDay();S.g.t=now();renderHud()}
@@ -319,11 +337,92 @@ $('bkExp').onclick=async()=>{const v=btoa(unescape(encodeURIComponent(JSON.strin
 $('bkImp').onclick=()=>{try{const x=JSON.parse(decodeURIComponent(escape(atob($('bk').value.trim()))));S=merge(x,S);save();$('bkMsg').textContent='Progresso importado.';renderAll()}catch(_){$('bkMsg').textContent='Código inválido.'}};
 let rs=0;$('bkReset').onclick=e=>{if(!rs){rs=1;e.target.textContent='Clique de novo para zerar TUDO';return}S=blank();save();rs=0;e.target.textContent='Zerar progresso';renderAll()};
 
+// ---------- Resumos (tabela public.resumos no Supabase; editáveis aqui) ----------
+let RES=[],resCur=null,resEdit=false,resPrev=false,resQ='',resDel=0;
+const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const mdHtml=t=>window.marked&&window.DOMPurify?DOMPurify.sanitize(marked.parse(t||'')):'<pre style="white-space:pre-wrap">'+esc(t)+'</pre>';
+const RASC=id=>LS+'-rascunho-'+(id||'novo');
+const dataBR=d=>d?new Date(d).toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'}):'';
+function resDoBloco(b){return b&&M?RES.find(r=>r.materia===M.nome&&r.bloco===b):null}
+async function loadRes(){if(!sb||!user){RES=[];renderRes();return}
+ const{data,error}=await sb.from('resumos').select('*').order('bloco').order('ordem').order('titulo');
+ if(error){$('resArea').innerHTML='<div class="card note"></div>';$('resArea').firstChild.textContent='Erro ao carregar resumos: '+error.message;return}
+ RES=data||[];if(resCur&&!RES.some(r=>r.id===resCur))resCur=null;renderRes()}
+function abrirRes(id){resCur=id;resEdit=false;irPara('res');renderRes();window.scrollTo(0,0)}
+function renderRes(){const a=$('resArea');if(!a||view!=='res')return;
+ if(!sb){a.innerHTML='<div class="card note">Configure app/config.js para usar os resumos.</div>';return}
+ if(!user){a.innerHTML='<div class="card note">Entre com seu e-mail (no topo) para ver e editar seus resumos.</div>';return}
+ if(resEdit)return renderResEditor(a);
+ const r=resCur&&RES.find(x=>x.id===resCur);if(r)return renderResLeitura(a,r);
+ renderResLista(a)}
+function renderResLista(a){const nome=M?M.nome:null;
+ const q=resQ.trim().toLowerCase(),lst=RES.filter(r=>(!nome||r.materia===nome)&&(!q||(r.titulo+' '+r.bloco+' '+r.conteudo).toLowerCase().includes(q)));
+ const outros=nome?RES.filter(r=>r.materia!==nome).length:0;
+ a.innerHTML=`<div class="card"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap"><div class="tag px" style="margin:0">CADERNO · ${esc(nome||'TODAS')}</div><button class="pri" id="resNovo">+ Novo resumo</button></div>
+  <label class="field"><span>Buscar nos resumos desta matéria</span><input id="resBusca" placeholder="ex.: bloco de constitucionalidade, art. 5º…"></label>
+  <div class="reslist" id="resLst"></div>${outros?`<p class="note">${outros} resumo(s) de outras matérias: troque a matéria no topo.</p>`:''}</div>`;
+ const bu=$('resBusca');bu.value=resQ;bu.oninput=e=>{resQ=e.target.value;const p=e.target.selectionStart;renderResLista(a);const n=$('resBusca');n.focus();n.setSelectionRange(p,p)};
+ const L=$('resLst');
+ if(!lst.length)L.innerHTML=`<p class="note">${q?'Nada encontrado.':'Nenhum resumo nesta matéria ainda. Crie um ou mande o arquivo para o Claude importar.'}</p>`;
+ let blocoAt=null;lst.forEach(r=>{if(r.bloco!==blocoAt){blocoAt=r.bloco;const h=document.createElement('div');h.className='px note';h.style.cssText='font-size:9px;margin:16px 0 4px';h.textContent=(r.bloco||'SEM BLOCO').toUpperCase();L.appendChild(h)}
+  const b=document.createElement('button');b.innerHTML='<span></span><small></small>';b.firstChild.textContent=r.titulo;
+  let sub='Atualizado em '+dataBR(r.atualizado_em);if(q){const i=r.conteudo.toLowerCase().indexOf(q);if(i>=0)sub='…'+r.conteudo.slice(Math.max(0,i-50),i+70).replace(/[#*|]/g,' ').replace(/\s+/g,' ')+'…'}
+  b.lastChild.textContent=sub;b.onclick=()=>abrirRes(r.id);L.appendChild(b)});
+ $('resNovo').onclick=()=>{resCur=null;resEdit=true;resPrev=false;renderRes()}}
+function renderResLeitura(a,r){
+ a.innerHTML=`<div class="card"><div class="row" style="margin:0 0 12px;justify-content:space-between"><button id="resVolta" style="flex:0;white-space:nowrap">← Resumos</button><button class="pri" id="resEd" style="flex:0;white-space:nowrap">✎ Editar</button></div>
+  <div class="tag px"></div><h2 style="margin:0 0 4px;font-size:22px" id="resTit"></h2><p class="note" style="margin:0">Atualizado em ${esc(dataBR(r.atualizado_em))}</p>
+  <div class="toc" id="resToc"></div><div class="md" id="resMd" style="margin-top:14px"></div>
+  <div class="row"><button id="resCards">▶ Revisar cards desta matéria</button><button id="resTopo">↑ Topo</button></div></div>`;
+ a.querySelector('.tag').textContent=(r.bloco||r.materia).toUpperCase();$('resTit').textContent=r.titulo;
+ const md=$('resMd');md.innerHTML=mdHtml(r.conteudo);
+ if(resQ.trim()){const q=resQ.trim().toLowerCase(),w=document.createTreeWalker(md,NodeFilter.SHOW_TEXT),ns=[];while(w.nextNode())ns.push(w.currentNode);
+  ns.forEach(n=>{const i=n.data.toLowerCase().indexOf(q);if(i<0)return;const m=document.createElement('mark'),rest=n.splitText(i);rest.splitText(q.length);m.textContent=rest.data;rest.replaceWith(m)})}
+ const toc=$('resToc');md.querySelectorAll('h1').forEach((h,i)=>{h.id='sec'+i;const b=document.createElement('button');b.textContent=h.textContent.replace(/^\d+\.\s*/,'');b.onclick=()=>h.scrollIntoView({behavior:'smooth'});toc.appendChild(b)});
+ $('resVolta').onclick=()=>{resCur=null;renderRes()};$('resEd').onclick=()=>{resEdit=true;resPrev=false;renderRes()};
+ $('resTopo').onclick=()=>window.scrollTo({top:0,behavior:'smooth'});$('resCards').onclick=()=>{const m=MATS.find(x=>x.nome===r.materia);if(m&&m!==M){M=m;renderMats();renderAll()}irPara('obj')}}
+function renderResEditor(a){const r=resCur?RES.find(x=>x.id===resCur):null;
+ let d=null;try{d=JSON.parse(localStorage.getItem(RASC(resCur))||'null')}catch(e){}
+ const base={titulo:r?r.titulo:'',bloco:r?r.bloco:'',materia:r?r.materia:(M?M.nome:''),conteudo:r?r.conteudo:'',ordem:r?r.ordem:0};
+ const usarRasc=d&&(!r||d.t>new Date(r.atualizado_em).getTime()),v=usarRasc?Object.assign({},base,d):base;
+ a.innerHTML=`<div class="card"><div class="tag px">${r?'EDITANDO RESUMO':'NOVO RESUMO'}</div>
+  <div id="resRasc" class="${usarRasc?'':'hide'} fu note">Rascunho não salvo recuperado deste aparelho. <button id="resDesc" style="padding:4px 8px;font-size:12px">Descartar rascunho</button></div>
+  <label class="field"><span>Título</span><input id="resTitIn"></label>
+  <div style="display:flex;gap:8px;flex-wrap:wrap"><label class="field" style="flex:2;min-width:180px"><span>Matéria (igual ao nome da aba)</span><input id="resMatIn" list="resMats"></label>
+   <label class="field" style="flex:2;min-width:160px"><span>Bloco (ex.: Constitucional 02)</span><input id="resBlocoIn" list="resBlocos"></label>
+   <label class="field" style="flex:1;min-width:80px"><span>Ordem</span><input id="resOrdIn" type="number"></label></div>
+  <datalist id="resMats">${MATS.map(m=>`<option value="${esc(m.nome)}">`).join('')}</datalist><datalist id="resBlocos">${[...new Set([...RES.map(x=>x.bloco),...MATS.flatMap(m=>m.blocos)])].filter(Boolean).map(b=>`<option value="${esc(b)}">`).join('')}</datalist>
+  <div class="seg"><button id="resW" class="${resPrev?'':'on'}">Escrever</button><button id="resP" class="${resPrev?'on':''}">Pré-visualizar</button></div>
+  <textarea id="resTxt" class="${resPrev?'hide':''}" spellcheck="true"></textarea><div id="resPv" class="md ${resPrev?'':'hide'}" style="min-height:200px;padding:12px;border:2px dashed var(--line);border-radius:8px"></div>
+  <p class="note">Formatação: <b># Título de seção</b>, <b>## Subtítulo</b>, <b>**negrito**</b>, <b>*itálico*</b>, <b>- lista</b>, <b>&gt; destaque</b>. Tabela: linhas com <b>| col | col |</b> e, abaixo do cabeçalho, <b>|---|---|</b>.</p>
+  <div class="row"><button class="pri" id="resSalvar">💾 Salvar</button><button id="resCanc">Cancelar</button>${r?'<button class="b0" id="resDel">Excluir</button>':''}</div><p class="note" id="resMsg"></p></div>`;
+ const f={titulo:$('resTitIn'),materia:$('resMatIn'),bloco:$('resBlocoIn'),ordem:$('resOrdIn'),conteudo:$('resTxt')};
+ for(const k in f)f[k].value=v[k];
+ const coleta=()=>({titulo:f.titulo.value.trim(),materia:f.materia.value.trim(),bloco:f.bloco.value.trim(),ordem:parseInt(f.ordem.value)||0,conteudo:f.conteudo.value});
+ const mudou=()=>{const c=coleta();return Object.keys(base).some(k=>String(c[k])!==String(base[k]))};
+ for(const k in f)f[k].oninput=()=>{try{mudou()?localStorage.setItem(RASC(resCur),JSON.stringify(Object.assign(coleta(),{t:now()}))):localStorage.removeItem(RASC(resCur))}catch(e){}};
+ const pv=()=>{$('resPv').innerHTML=mdHtml(f.conteudo.value)};if(resPrev)pv();
+ $('resW').onclick=()=>{resPrev=false;$('resW').classList.add('on');$('resP').classList.remove('on');f.conteudo.classList.remove('hide');$('resPv').classList.add('hide')};
+ $('resP').onclick=()=>{resPrev=true;pv();$('resP').classList.add('on');$('resW').classList.remove('on');f.conteudo.classList.add('hide');$('resPv').classList.remove('hide')};
+ if($('resDesc'))$('resDesc').onclick=()=>{try{localStorage.removeItem(RASC(resCur))}catch(e){}renderRes()};
+ const fim=()=>{try{localStorage.removeItem(RASC(resCur))}catch(e){}resEdit=false};
+ $('resCanc').onclick=()=>{if(mudou()&&!confirm('Descartar as alterações?'))return;fim();renderRes()};
+ $('resSalvar').onclick=async e=>{const c=coleta(),msg=$('resMsg');if(!c.titulo||!c.materia){msg.textContent='Preencha pelo menos título e matéria.';return}
+  e.target.disabled=true;msg.textContent='Salvando…';
+  const q=r?sb.from('resumos').update(c).eq('id',r.id):sb.from('resumos').insert(c);
+  const{data,error}=await q.select().single();e.target.disabled=false;
+  if(error){msg.textContent='Erro ao salvar (o rascunho continua guardado neste aparelho): '+error.message;return}
+  fim();const i=RES.findIndex(x=>x.id===data.id);i>=0?RES[i]=data:RES.push(data);resCur=data.id;SFX.ok();renderRes();loadRes()};
+ if(r)$('resDel').onclick=async e=>{if(!resDel){resDel=1;e.target.textContent='Clique de novo para excluir';setTimeout(()=>{resDel=0;if(e.target.isConnected)e.target.textContent='Excluir'},4000);return}
+  resDel=0;const{error}=await sb.from('resumos').delete().eq('id',r.id);if(error){$('resMsg').textContent='Erro ao excluir: '+error.message;return}
+  fim();RES=RES.filter(x=>x.id!==r.id);resCur=null;renderRes()}}
+
 // ---------- Navegação ----------
 let view='obj';
 document.querySelectorAll('#frentes button').forEach(b=>b.onclick=()=>{view=b.dataset.v;document.querySelectorAll('#frentes button').forEach(x=>x.classList.toggle('on',x===b));
- ['obj','disc','oral','prog'].forEach(id=>$(id).classList.toggle('hide',id!==view));if(view==='prog')renderProg()});
-function renderAll(){renderHud();if(!M)return;again=[];combo=1;sessDone=0;renderObj();renderDiscSel();pickOral();renderProg()}
+ ['obj','disc','oral','prog','res'].forEach(id=>$(id).classList.toggle('hide',id!==view));if(view==='prog')renderProg();if(view==='res')renderRes()});
+function irPara(v){const b=document.querySelector(`#frentes button[data-v="${v}"]`);if(b)b.click()}
+function renderAll(){renderHud();renderRes();if(!M)return;again=[];combo=1;sessDone=0;renderObj();renderDiscSel();pickOral();renderProg()}
 
 (async()=>{loadLocal();
  try{await loadData()}catch(e){$('desc').textContent='Erro ao carregar dados: '+e.message+'. Abra pelo GitHub Pages ou por um servidor local (não por file://).'}
